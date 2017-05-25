@@ -2,19 +2,20 @@ import random
 from functools import reduce
 from builtins import filter
 from itertools import accumulate
+import re
 
 # This char is the one that represents a block in the crossword
 blockchar = '#'
 
 # The allowed letters
-allowed_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'y', 'æ', 'ø', 'å', blockchar]
+allowed_letters = ['-', blockchar, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'y', 'æ', 'ø', 'å']
 
 # The vocabulary
 vocabulary = set()
     
 # Dimensions of cross word
-cross_height = 4
-cross_width = 4
+cross_height = 5
+cross_width = 5
 
 # GA parameters
 gene_pool_size = 1000
@@ -186,10 +187,14 @@ if __name__ == "__main__":
     voc_data = voc_file.readlines()
     
     # Strip newline character
-    voc_data = list(map(lambda x: x.strip('\n'), voc_data))
+    voc_data = list(map(lambda x: x.strip('\n').lower(), voc_data))
     
     # Filter out words longer than longest dimension of crossword (no needs for words longer than the largest dimension in the crossword)
     vocabulary = set(filter(lambda x: len(x)<=max(cross_width, cross_height), voc_data))
+    
+    # Make a string with allowed letters for regex searching for words with characters not in accepted set
+    allowchars = ''.join(allowed_letters)
+    vocabulary = set(filter(lambda x: re.search("[^{}]".format(allowchars), x) is None, vocabulary))
     
     print("starting crossword creator!")
     start_ga()
