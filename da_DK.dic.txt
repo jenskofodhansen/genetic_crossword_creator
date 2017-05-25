@@ -1294,7 +1294,6 @@ varefakta
 varefaktas
 varefaktane
 varefaktanes
-vare-
 vare
 varbørste
 varde
@@ -1528,8 +1527,6 @@ vandhønens
 vandhøner
 vandhøns
 vandhøners
-vandhøns'
-vandhøns's
 vandhønses
 vandhønerne
 vandhønsene
@@ -1834,9 +1831,6 @@ vaccine
 vablet
 vaccination
 vabel
-v
-V
-V
 uønskelig
 uåbnet
 uøvet
@@ -1931,7 +1925,6 @@ uvederheftigeres
 uvederhæftigeres
 uvederheftigst
 uvederhæftigst
-u
 uundgåelighed
 uundgåelig
 uudviklet
@@ -2109,8 +2102,6 @@ usurpator
 usurpere
 usurpering
 usus
-usus'
-usus's
 ususes
 usvigelig
 usvækket
@@ -2427,8 +2418,6 @@ urhønens
 urhøner
 urhøns
 urhøners
-urhøns'
-urhøns's
 urhønses
 urhønerne
 urhønsene
@@ -2967,7 +2956,6 @@ undseeligste
 undseligste
 undseeligstes
 undseligstes
-u
 undse
 undser
 undses
@@ -3066,8 +3054,6 @@ undervisningsbøgernes
 undervandsbåd
 undervandskamera
 undervands
-undervands'
-undervands's
 undervandses
 underudviklet
 undertøjsskuffe
@@ -3751,7 +3737,6 @@ uheldssvangreres
 uheldsvangreres
 uheldssvangrest
 uheldsvangrest
-u
 uheldsramt
 uheldsramts
 uheldsramte
@@ -4213,8 +4198,6 @@ uerfarneste
 uerfarnestes
 uerfarent
 uens
-uens'
-uens's
 uenses
 uenighed
 uengageret
@@ -4301,8 +4284,6 @@ udvælgelseskriteriernes
 udvisningstruet
 udvokset
 udvortes
-udvortes'
-udvortes's
 udvorteses
 udvækst
 udvælge
@@ -6316,7 +6297,6 @@ uanseeligste
 uanseligste
 uanseeligstes
 uanseligstes
-u
 uanfægtet
 uangribelig
 uangribelighed
@@ -6357,9 +6337,6 @@ uafhentet
 uafhængig
 uafhængighed
 tårnur
-U
-u
-u-
 uacceptabel
 uacceptabels
 uacceptabelts
@@ -9630,7 +9607,6 @@ tjenesteivrigeres
 tjenstivrigeres
 tjenesteivrigst
 tjenstivrigst
-t
 tjenestegrenschef
 tjenestefri
 tjenestefolk
@@ -12793,7 +12769,6 @@ tablet
 tabletform
 tabernakel
 taber
-t.
 tab
 tabasco
 tabe
@@ -12801,15 +12776,12 @@ tabel
 tabellarisk
 tabellere
 tabende
-t
 såt
 såtid
 såvel
 såvel
 såvel
 såvidt
-T
-t
 såsæd
 såre
 sårhelende
@@ -27560,7 +27532,6 @@ sabbatårene
 sabbatsårenes
 sabbatårenes
 sabbatsdag
-S
 sabbathvile
 sabbatshvile
 sabbathviles
@@ -27570,7 +27541,6 @@ sabbatshvilen
 sabbathvilens
 sabbatshvilens
 sabbat
-s
 råvildt
 råsylte
 råsyltning
@@ -31670,15 +31640,12 @@ rabaldermøde
 rabarber
 rabarbergrød
 rabat
-r
-R
 quizze
 quizdeltager
 quiz
 quisling
 quiche
 quickstep
-q
 qua
 påvirkelig
 påvirket
@@ -36404,7 +36371,6 @@ parallelforbunden
 parallelforbundens
 parallelforbundne
 parallelforbundnes
-p
 parallakse
 parallel
 parallel
@@ -36809,9 +36775,6 @@ pacer
 pacemaker
 pace
 pace
-p.
-p
-P
 ozonnedbrydende
 ozonhul
 ozon
@@ -40926,9 +40889,6 @@ obducent
 oase
 når
 når
-O
-o
-o.a.
 nålestribet
 nåleskovsbælte
 nålepenge
@@ -41496,7 +41456,6 @@ nytteløsest
 nyttesløsest
 nytteløseste
 nyttesløseste
-n
 nyttig
 nytolkning
 nytte
@@ -44159,11 +44118,9 @@ naboby
 naboerske
 nachspiel
 nabo
-n
 måtte
 må
 måttet
-N
 måtte
 mås
 måske
@@ -49963,15 +49920,11 @@ mad
 mad
 mad-
 madagaskarpeber
-M
-m
-m
 lårkort
 lårkorts
 lårkorte
 lårkortes
 lårmuskel
-M
 låsning
 låse
 låsbar
@@ -51177,7 +51130,6 @@ luvgerrigste
 luvgirigste
 luvgerrigstes
 luvgirigstes
-l
 luve
 lutter
 lutters
@@ -51591,7 +51543,6 @@ lovmedholdigere
 lovmedholdigeres
 lovmedholdeligeres
 lovmedholdeligst
-l
 lovløs
 lovlydig
 lovliggørelse
@@ -54522,10 +54473,6 @@ labilitet
 laborant
 laboratoriearbejde
 laboratorieassistent
-L
-l
-l
-l.
 la
 lab
 laban
@@ -55848,7 +55795,6 @@ kulturcentrers
 kulturcentrumers
 kulturcentrummers
 kulturcentrerne
-k
 kulturbærende
 kulturby
 kulturbetinget
@@ -61458,8 +61404,6 @@ kabaret
 kabaret
 kabalekort
 kabale
-k
-K
 jøsses
 Jørgen
 jøkel
@@ -62436,10 +62380,6 @@ iøjnespringendes
 iøjnespringende
 jacarandatræ
 ja
-ja
-ja
-j
-J
 iørefaldende
 iøjefaldende
 iøjefaldendes
@@ -62798,7 +62738,6 @@ irsks
 irske
 irskes
 irøre
-"I
 isafkøle
 isallobar
 irritament
@@ -65992,15 +65931,10 @@ iagttagedes
 iagttagnes
 iagttag
 i
-i
-I
-I
-i
 eder
 jer
 eders
 jeres
-I
 hårvask
 hårvildt
 hårvoks
@@ -70861,7 +70795,6 @@ handelsattacheers
 handelsattachéers
 handelsattacheerne
 handelsattachéerne
-h
 handelsakademi
 handelsagent
 handelsaftale
@@ -71436,11 +71369,6 @@ gåseøjnene
 gåseøjnenes
 gåstol
 gåtur
-H
-h
-h
-HA
-ha
 ha
 Habakuk
 gåsegang
@@ -71458,7 +71386,6 @@ gåsefedt
 gåsedun
 gås
 gæs
-gæs'
 gæssene
 gæssenes
 gårsdag
@@ -73395,7 +73322,6 @@ glædeløsest
 glædesløsest
 glædeløseste
 glædesløseste
-g
 glæde
 glæde
 glykosid
@@ -75900,9 +75826,6 @@ gaben
 gabe
 gabardine
 fåtallig
-G
-g
-g
 gab
 fåret
 fåtal
@@ -75916,7 +75839,6 @@ fåmælte
 fåmæltes
 fåmandsvælde
 fåborgenser
-få
 få
 får
 fås
@@ -84334,7 +84256,6 @@ føderativest
 federativeste
 føderativeste
 federativestes
-f
 føderalisme
 føderalist
 føderalistisk
@@ -84739,7 +84660,6 @@ farvespektrers
 farvespektrumers
 farvespektrummers
 farvespektrerne
-f
 farver
 farveprægtig
 farvenegativfilm
@@ -85411,9 +85331,6 @@ fablers
 fablerne
 fablernes
 fa
-f.
-F
-f
 Ezechiel
 eyeliner
 exitskilt
@@ -87906,7 +87823,6 @@ ebonit
 Ebeltoft
 ebbe
 ebbe
-e
 dåvildt
 dåseøl
 dåselatter
@@ -91684,10 +91600,7 @@ dacaponummer
 dacapo
 da
 da
-d
-D
 cølibat
-D
 cæsium
 cæsur
 cæsar
@@ -92158,8 +92071,6 @@ coatningernes
 coate
 coach
 coaster
-CO2-afgift
-"c
 cm
 clou
 clockradio
@@ -93071,7 +92982,6 @@ cafeteriaers
 cafeteriers
 kafeteriaers
 kafeteriers
-c
 cafeteater
 caféliv
 cafégæst
@@ -93105,10 +93015,6 @@ bårebuket
 bås
 båse
 båthorn
-C
-C
-c
-c.
 ca.
 cabriolet
 båndsav
@@ -97087,7 +96993,6 @@ binokulærest
 binokulareste
 binokulæreste
 binokularestes
-b
 bingoplade
 bingo
 bingelurt
@@ -97593,7 +97498,6 @@ bevisligste
 beviseligstes
 bevisligstes
 bevislig
-b
 bevisbedømmelse
 bevise
 bevinget
@@ -100205,9 +100109,7 @@ babelsk
 babelsks
 babelske
 babelskes
-b
 Babel
-B
 azurblå
 azurblåts
 azurblås
@@ -100775,7 +100677,6 @@ asnerne
 asenernes
 asnernes
 ase
-"A
 as
 asbest
 asbestcement
@@ -105766,11 +105667,6 @@ abbedi
 abbed
 ab
 A-aktie
-a
-a
-A
-68-generation
-65-billet
 Rambøll
 vidtberømt
 vidtberømts
@@ -108238,9 +108134,6 @@ zygote
 ævl
 ævle
 ævred
-ø
-ø
-ø-
 Ø
 øbo
 øbue
@@ -108719,16 +108612,13 @@ zygote
 øvrighed
 øvrighedsperson
 å
-å
-Å
-å
-å's
-å'et
-å'ets
-å'er
-å'ers
-å'erne
-å'ernes
+ås
+ået
+åets
+åer
+åers
+åerne
+åernes
 åben
 åbens
 åbents
@@ -132850,7 +132740,6 @@ kronebeløb
 reklamationsfrist
 ressortområde
 velmagt
-N
 velmagtsdag
 Nm
 gymnasie
