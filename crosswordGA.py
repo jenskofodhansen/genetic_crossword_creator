@@ -1,6 +1,7 @@
 import random
 from functools import reduce
 from builtins import filter
+from itertools import accumulate
 
 # This char is the one that represents a block in the crossword
 blockchar = '#'
@@ -12,22 +13,22 @@ allowed_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', '
 vocabulary = set()
     
 # Dimensions of cross word
-cross_height = 6
-cross_width = 6
+cross_height = 4
+cross_width = 4
 
 # GA parameters
-gene_pool_size = 10000
-mutate_probability = 0.25
+gene_pool_size = 1000
+mutate_probability = 0.05 # 5 percent chance of mutating a genome
 number_of_elite_genes = int(gene_pool_size*0.01)
 number_of_epochs = 1000
 
 
 # Create an array of randomly chosen letters
-def create_random_genome():
+def create_random_chromosome():
     return [random.choice(allowed_letters) for i in range(cross_height*cross_width)]
 
 
-# Pretty print of the crossword genome
+# Pretty print of the crossword chromosome
 def print_crossword(crossword):
     for idx in range(0, cross_width * cross_height, cross_width):
         print(crossword[idx:idx + cross_width])
@@ -96,8 +97,8 @@ def is_crossword_valid(crossword):
     return True
 
 
-# Pair a genome by fusing two genomes at a randomly picked breakpoint. Apply a small chance of mutating the genome
-def pair_genomes(father, mother):
+# Breed a new chromosome by fusing two chromosomes at a randomly picked breakpoint. Apply a small chance of mutating the chromosome
+def pair_chromosomes(father, mother):
     breakpoint = random.randint(0, cross_width * cross_height)
     
     father_gene = father[1]
@@ -105,6 +106,7 @@ def pair_genomes(father, mother):
     
     child = father_gene[:breakpoint] + mother_gene[breakpoint:]
     
+    # Mutating the chromosome on genome level
     for i in range(0, cross_width * cross_height):
         if random.random() < mutate_probability:
             child[i] = random.choice(allowed_letters)
@@ -113,43 +115,52 @@ def pair_genomes(father, mother):
 
 
 '''
-Pick a genome by fitness. This method uses roulette picking, where the chance of a genome
+Pick a chromosome by fitness. This method uses roulette picking, where the chance of a chromosome
 being picked is equal to its fitness. 
 '''
-def pick_by_fitness(genomes_with_fitness, fitness_sum):
+def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
+    # a random int between 0 and the total fitness
     roulette = random.randint(0, fitness_sum)
     
-    accumelator = 0
-    for genome in genomes_with_fitness:
-        accumelator += genome[0]
-        if accumelator > roulette:
-            return genome
+    ''' 
+    This line first maps only the fitness from the set of fitness and chromosome 
+    After this, it makes the accumulated fitness list using the itertools library
+    This accumulated list can be used to look up our chromosome picked by the roulette    
+    '''
+    accumulated_fitness = list(accumulate(map(lambda x: x[0], chromosomes_with_fitness)))
     
-    return random.sample(genomes_with_fitness, 1)[0] 
+    idx=0;
+    for fitness in accumulated_fitness:
+        if roulette < fitness:
+            return chromosomes_with_fitness[idx]
+    
+        idx += 1
+        
+    return random.sample(chromosomes_with_fitness, 1)[0] 
 
 
 # The genetic algorithm for finding crosswords
 def start_ga():
-    # Create pool of random genomes
-    genomes = [create_random_genome() for i in range(gene_pool_size)]
+    # Create pool of random chromosomes
+    chromosomes = [create_random_chromosome() for i in range(gene_pool_size)]
     
     # The actual GA process
     for epoch in range(0, number_of_epochs):
-        # Make a list of sets containing the genome fitness, as well as the genome itself
-        genomes_with_fitness = [(get_crossword_fitness(genomes[i]), genomes[i]) for i in range(gene_pool_size)]
+        # Make a list of sets containing the chromosome fitness, as well as the chromosome itself
+        chromosomes_with_fitness = [(get_crossword_fitness(chromosomes[i]), chromosomes[i]) for i in range(gene_pool_size)]
         
-        # Sort the list to have fittest genomes first
-        genomes_with_fitness.sort(reverse = True)
+        # Sort the list to have fittest chromosomes first
+        chromosomes_with_fitness.sort(reverse = True)
         
-        # We use the sum 
-        fitness_sum = reduce(lambda x,y: (x[0]+y[0],), genomes_with_fitness)[0]
+        # We use the sum for roulette picking and finding the average
+        fitness_sum = reduce(lambda x,y: (x[0]+y[0],), chromosomes_with_fitness)[0]
                     
-        # The new population starts with the x elite genomes from the previous epoch
-        new_pop = [genomes_with_fitness[i][1] for i in range(0, number_of_elite_genes)]
+        # The new population starts with the x elite chromosomes from the previous epoch
+        new_pop = [chromosomes_with_fitness[i][1] for i in range(0, number_of_elite_genes)]
         
-        # The rest of the population is breeds of randomly picked genomes
-        breeds = [pair_genomes(pick_by_fitness(genomes_with_fitness, fitness_sum), pick_by_fitness(genomes_with_fitness, fitness_sum)) for x in range(0, gene_pool_size-number_of_elite_genes)]
-        genomes = new_pop + breeds
+        # The rest of the population is breeds of randomly picked chromosomes
+        breeds = [pair_chromosomes(pick_by_fitness(chromosomes_with_fitness, fitness_sum), pick_by_fitness(chromosomes_with_fitness, fitness_sum)) for x in range(0, gene_pool_size-number_of_elite_genes)]
+        chromosomes = new_pop + breeds
         
         best_crossword = new_pop[0]
         
@@ -157,7 +168,7 @@ def start_ga():
         
         # Print stats every 10th epoch
         if epoch%10 is 0:
-            print("epoch {} ended - best fitness={} - average fitness={}".format(epoch, genomes_with_fitness[0][0], avg_fitness))
+            print("epoch {} ended - best fitness={} - average fitness={}".format(epoch, chromosomes_with_fitness[0][0], avg_fitness))
         
         # Break if we found a solution (every word exists in the vocabulary)
         if is_crossword_valid(best_crossword) is True:
