@@ -24,10 +24,20 @@ number_of_elite_chromosomes = int(gene_pool_size*0.01)
 number_of_new_chromosomes = int(gene_pool_size*0.1)
 number_of_epochs = 10000
 
+# Pick a random letter by weighted probability
+def pick_random_gene():
+    idx = bisect(letter_probabilites, random.random())
+    
+    letter = allowed_letters[idx]
+    
+    if random.random()<blockchar_probablity:
+        letter = blockchar
+    
+    return letter
 
 # Create an array of randomly chosen letters
 def create_random_chromosome():
-    return [random.choice(allowed_letters) for i in range(cross_height*cross_width)]
+    return [pick_random_gene() for i in range(cross_height*cross_width)]
 
 
 # Pretty print of the crossword chromosome
@@ -131,7 +141,7 @@ def pair_chromosomes(father, mother):
     # Mutating the chromosome on genome level
     for i in range(0, cross_width * cross_height):
         if random.random() < mutate_probability:
-            child[i] = random.choice(allowed_letters)
+            child[i] = pick_random_gene()
             
     return child
 
@@ -190,6 +200,7 @@ def start_ga():
         # Print stats every 10th epoch
         if epoch%5 is 0:
             print("epoch {} ended - best fitness={} - average fitness={}".format(epoch, chromosomes_with_fitness[0][0], avg_fitness))
+            print_crossword(best_crossword)
         
         # Break if we found a solution (every word exists in the vocabulary)
         if is_crossword_valid(best_crossword) is True:
@@ -216,6 +227,12 @@ if __name__ == "__main__":
     allowchars = ''.join(allowed_letters)
     vocabulary = set(filter(lambda x: re.search("[^{}]".format(allowchars), x) is None, vocabulary))
     
+    # Calculate letter probabilites by counting
+    vocabulary_as_string = ''.join(vocabulary)
+    
+    letter_probabilites = [vocabulary_as_string.count(letter)/len(vocabulary_as_string) for letter in allowed_letters]
+    letter_probabilites = list(accumulate(letter_probabilites))
+        
     print("starting crossword creator!")
     start_ga()
     
