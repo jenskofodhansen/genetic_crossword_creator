@@ -13,14 +13,15 @@ allowed_letters = ['-', blockchar, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
 vocabulary = set()
     
 # Dimensions of cross word
-cross_height = 5
-cross_width = 5
+cross_height = 8
+cross_width = 8
 
 # GA parameters
-gene_pool_size = 1000
+gene_pool_size = 2000
 mutate_probability = 0.10 #chance of mutating a genome
-number_of_elite_genes = int(gene_pool_size*0.01)
-number_of_epochs = 1000
+number_of_elite_chromosomes = int(gene_pool_size*0.01)
+number_of_new_chromosomes = int(gene_pool_size*0.1)
+number_of_epochs = 10000
 
 
 # Create an array of randomly chosen letters
@@ -144,7 +145,7 @@ def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
     return chromosomes_with_fitness[index] 
     
     # a random int between 0 and the total fitness
-    roulette = random.randint(0, fitness_sum)
+    roulette = random.randint(0, int(fitness_sum))
     
     ''' 
     This line first maps only the fitness from the set of fitness and chromosome 
@@ -182,18 +183,19 @@ def start_ga():
         fitness_sum = sum(chromosome_fitness)
                     
         # The new population starts with the x elite chromosomes from the previous epoch
-        new_pop = [chromosomes_with_fitness[i][1] for i in range(0, number_of_elite_genes)]
+        new_pop = [create_random_chromosome() for i in range(0, number_of_new_chromosomes)]
+        elite_pop = [chromosomes_with_fitness[i][1] for i in range(0, number_of_elite_chromosomes)]
         
         # The rest of the population is breeds of randomly picked chromosomes
-        breeds = [pair_chromosomes(pick_by_fitness(chromosomes_with_fitness, fitness_sum), pick_by_fitness(chromosomes_with_fitness, fitness_sum)) for x in range(0, gene_pool_size-number_of_elite_genes)]
-        chromosomes = new_pop + breeds
+        breeds = [pair_chromosomes(pick_by_fitness(chromosomes_with_fitness, fitness_sum), pick_by_fitness(chromosomes_with_fitness, fitness_sum)) for x in range(0, gene_pool_size-number_of_elite_chromosomes-number_of_new_chromosomes)]
+        chromosomes = new_pop + elite_pop + breeds
         
-        best_crossword = new_pop[0]
+        best_crossword = elite_pop[0]
         
         avg_fitness = fitness_sum/gene_pool_size
         
         # Print stats every 10th epoch
-        if epoch%10 is 0:
+        if epoch%5 is 0:
             print("epoch {} ended - best fitness={} - average fitness={}".format(epoch, chromosomes_with_fitness[0][0], avg_fitness))
         
         # Break if we found a solution (every word exists in the vocabulary)
