@@ -1,5 +1,4 @@
 import random
-from functools import reduce
 from builtins import filter
 from itertools import accumulate
 import re
@@ -19,7 +18,7 @@ cross_width = 5
 
 # GA parameters
 gene_pool_size = 1000
-mutate_probability = 0.05 # 5 percent chance of mutating a genome
+mutate_probability = 0.10 #chance of mutating a genome
 number_of_elite_genes = int(gene_pool_size*0.01)
 number_of_epochs = 1000
 
@@ -35,18 +34,38 @@ def print_crossword(crossword):
         print(crossword[idx:idx + cross_width])
      
         
+def get_word_fitness(word):
+    max_fitness = 0
+    
+    if word in vocabulary:
+        return len(word)
+    
+    words_of_len = filter(lambda x: len(x) is len(word), vocabulary)
+    
+    for voc_word in words_of_len:
+        temp_fitness = sum(c1==c2 for c1,c2 in zip(word,voc_word))
+        
+        max_fitness = max(max_fitness, temp_fitness)
+        
+    return max_fitness**2
+        
 # Evaluate a single strings fitness
 def get_crossline_fitness(crossline):
     fitness = 0
     
+    line_as_string = ''.join(crossline)
+    
     # We take words from start until we hit either the end or the block character
-    words = ''.join(crossline).split(blockchar)
+    words = line_as_string.split(blockchar)
     
     # For each word, they count if the match
     for word in words:
         if word in vocabulary:
-            fitness += len(word)    
+            fitness += get_word_fitness(word)    
             
+    if line_as_string.find(blockchar*2) >= 0:
+        return fitness / 2
+    
     return fitness
  
  
@@ -120,6 +139,10 @@ Pick a chromosome by fitness. This method uses roulette picking, where the chanc
 being picked is equal to its fitness. 
 '''
 def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
+    
+    index = int(min(random.expovariate(5)*len(chromosomes_with_fitness), len(chromosomes_with_fitness)-1))
+    return chromosomes_with_fitness[index] 
+    
     # a random int between 0 and the total fitness
     roulette = random.randint(0, fitness_sum)
     
@@ -147,14 +170,16 @@ def start_ga():
     
     # The actual GA process
     for epoch in range(0, number_of_epochs):
+        chromosome_fitness = [get_crossword_fitness(x) for x in chromosomes]
+        
         # Make a list of sets containing the chromosome fitness, as well as the chromosome itself
-        chromosomes_with_fitness = [(get_crossword_fitness(chromosomes[i]), chromosomes[i]) for i in range(gene_pool_size)]
+        chromosomes_with_fitness = list(zip(chromosome_fitness, chromosomes))
         
         # Sort the list to have fittest chromosomes first
         chromosomes_with_fitness.sort(reverse = True)
         
         # We use the sum for roulette picking and finding the average
-        fitness_sum = reduce(lambda x,y: (x[0]+y[0],), chromosomes_with_fitness)[0]
+        fitness_sum = sum(chromosome_fitness)
                     
         # The new population starts with the x elite chromosomes from the previous epoch
         new_pop = [chromosomes_with_fitness[i][1] for i in range(0, number_of_elite_genes)]
