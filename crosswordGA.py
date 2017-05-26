@@ -9,13 +9,15 @@ blockchar = '#'
 
 # The allowed letters
 allowed_letters = ['-', blockchar, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'y', 'æ', 'ø', 'å']
+letter_probabilites = ()
+blockchar_probablity = 0.05
 
 # The vocabulary
 vocabulary = set()
     
 # Dimensions of cross word
-cross_height = 7
-cross_width = 8
+cross_height = 6
+cross_width = 6
 
 # GA parameters
 gene_pool_size = 2000
