@@ -1,6 +1,7 @@
 import random
 from builtins import filter
 from itertools import accumulate
+from bisect import bisect
 import re
 
 # This char is the one that represents a block in the crossword
@@ -13,7 +14,7 @@ allowed_letters = ['-', blockchar, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
 vocabulary = set()
     
 # Dimensions of cross word
-cross_height = 8
+cross_height = 7
 cross_width = 8
 
 # GA parameters
@@ -140,10 +141,6 @@ Pick a chromosome by fitness. This method uses roulette picking, where the chanc
 being picked is equal to its fitness. 
 '''
 def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
-    
-    index = int(min(random.expovariate(5)*len(chromosomes_with_fitness), len(chromosomes_with_fitness)-1))
-    return chromosomes_with_fitness[index] 
-    
     # a random int between 0 and the total fitness
     roulette = random.randint(0, int(fitness_sum))
     
@@ -152,17 +149,13 @@ def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
     After this, it makes the accumulated fitness list using the itertools library
     This accumulated list can be used to look up our chromosome picked by the roulette    
     '''
-    accumulated_fitness = list(accumulate(map(lambda x: x[0], chromosomes_with_fitness)))
     
-    idx=0;
-    for fitness in accumulated_fitness:
-        if roulette < fitness:
-            return chromosomes_with_fitness[idx]
+    # Unzip chromosomes with fitess
+    fitness, chromosomes = zip(*chromosomes_with_fitness)
+    accumulated_fitness = list(accumulate(fitness))
+    idx = bisect(accumulated_fitness, roulette)
     
-        idx += 1
-        
-    return random.sample(chromosomes_with_fitness, 1)[0] 
-
+    return chromosomes_with_fitness[min(idx, gene_pool_size-1)]
 
 # The genetic algorithm for finding crosswords
 def start_ga():
