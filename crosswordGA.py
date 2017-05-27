@@ -3,27 +3,30 @@ from builtins import filter
 from itertools import accumulate
 from bisect import bisect
 import re
+from configparser import ConfigParser
 
 # This char is the one that represents a block in the crossword
-blockchar = '#'
+blockchar = '*'
 
 # The allowed letters
 allowed_letters = ['-', blockchar, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'y', 'æ', 'ø', 'å']
-letter_probabilites = ()
-blockchar_probablity = 0.05
+letter_probabilites = () # These will be calculated
 
 # The vocabulary
 vocabulary = set()
     
+# The following parameters are the default parameters, which are overriden by the config file
 # Dimensions of cross word
-cross_height = 6
-cross_width = 6
+cross_height = 4
+cross_width = 4
+
+blockchar_probablity = 0.05
 
 # GA parameters
-gene_pool_size = 2000
+gene_pool_size = 1000
 mutate_probability = 0.10 #chance of mutating a genome
 number_of_elite_chromosomes = int(gene_pool_size*0.01)
-number_of_new_chromosomes = int(gene_pool_size*0.1)
+number_of_new_chromosomes = int(gene_pool_size*0.2)
 number_of_epochs = 10000
 
 # Pick a random letter by weighted probability
@@ -212,8 +215,29 @@ def start_ga():
     # Pretty print the found solution
     print_crossword(best_crossword)
     
+    
+def read_config():
+    config = ConfigParser()
+    config.read("settings.ini")
+    
+    if not config.has_section("algorithmsettings"):
+        return
+    
+    ga_settings = config["algorithmsettings"]
+    
+    blockchar_probablity = ga_settings.getfloat("blockchar_probablity")
+    cross_height = ga_settings.getint("cross_height")
+    cross_width = ga_settings.getint("cross_width")
+    
+    gene_pool_size = ga_settings.getint("gene_pool_size")
+    mutate_probability = ga_settings.getfloat("mutate_probability")
+    number_of_elite_chromosomes = ga_settings.getint("number_of_elite_chromosomes")
+    number_of_new_chromosomes = ga_settings.getint("number_of_new_chromosomes")
+    number_of_epochs = ga_settings.getint("number_of_epochs")
             
 if __name__ == "__main__":
+    read_config()
+    
     print("Reading vocabulary!")
     
     voc_file = open("da_DK.dic.txt", encoding="utf-8")
