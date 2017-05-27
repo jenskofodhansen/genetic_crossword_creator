@@ -243,16 +243,28 @@ def read_config():
     
     ga_settings = config["algorithmsettings"]
     
+    global blockchar_probablity
     blockchar_probablity = ga_settings.getfloat("blockchar_probablity")
+    
+    global cross_height
     cross_height = ga_settings.getint("cross_height")
+    
+    global cross_width
     cross_width = ga_settings.getint("cross_width")
     
+    global gene_pool_size
     gene_pool_size = ga_settings.getint("gene_pool_size")
+    
+    global mutate_probability 
     mutate_probability = ga_settings.getfloat("mutate_probability")
+    global number_of_elite_chromosomes 
     number_of_elite_chromosomes = ga_settings.getint("number_of_elite_chromosomes")
+    global number_of_new_chromosomes 
     number_of_new_chromosomes = ga_settings.getint("number_of_new_chromosomes")
+    global number_of_epochs 
     number_of_epochs = ga_settings.getint("number_of_epochs")
     
+    global long_word_multiplier 
     long_word_multiplier = ga_settings.getfloat("long_word_multiplier")
             
 if __name__ == "__main__":
