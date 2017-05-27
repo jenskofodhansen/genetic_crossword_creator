@@ -50,7 +50,8 @@ def print_crossword(crossword):
     for idx in range(0, cross_width * cross_height, cross_width):
         print(crossword[idx:idx + cross_width])
      
-        
+
+# Calculate fitness value per word
 def get_word_fitness(word):
     max_fitness = 0
     
@@ -253,7 +254,7 @@ if __name__ == "__main__":
     allowchars = ''.join(allowed_letters)
     vocabulary = set(filter(lambda x: re.search("[^{}]".format(allowchars), x) is None, vocabulary))
     
-    # Calculate letter probabilites by counting
+    # Calculate letter probabilities by counting
     vocabulary_as_string = ''.join(vocabulary)
     
     letter_probabilites = [vocabulary_as_string.count(letter)/len(vocabulary_as_string) for letter in allowed_letters]
@@ -261,5 +262,7 @@ if __name__ == "__main__":
         
     print("starting crossword creator!")
     start_ga()
+    
+    # python -m cProfile -s time crosswordGA.py 
     
     
