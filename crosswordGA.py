@@ -29,6 +29,8 @@ number_of_elite_chromosomes = int(gene_pool_size*0.01)
 number_of_new_chromosomes = int(gene_pool_size*0.2)
 number_of_epochs = 10000
 
+long_word_multiplier = 1
+
 # Pick a random letter by weighted probability
 def pick_random_gene():
     idx = bisect(letter_probabilites, random.random())
@@ -65,7 +67,8 @@ def get_word_fitness(word):
         
         max_fitness = max(max_fitness, temp_fitness)
         
-    return max_fitness**2
+    return max_fitness**long_word_multiplier
+        
         
 # Evaluate a single strings fitness
 def get_crossline_fitness(crossline):
@@ -235,6 +238,8 @@ def read_config():
     number_of_elite_chromosomes = ga_settings.getint("number_of_elite_chromosomes")
     number_of_new_chromosomes = ga_settings.getint("number_of_new_chromosomes")
     number_of_epochs = ga_settings.getint("number_of_epochs")
+    
+    long_word_multiplier = ga_settings.getfloat("long_word_multiplier")
             
 if __name__ == "__main__":
     read_config()
