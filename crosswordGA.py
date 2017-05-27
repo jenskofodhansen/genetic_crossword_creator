@@ -181,7 +181,7 @@ def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
 
 # Save the result and settings used
 def save_settings_and_result(crossword, epoch):
-    result_file = open("results.csv", "w+")
+    result_file = open("results.csv", "a+")
     
     values = [epoch, epoch is not number_of_epochs, cross_height, cross_width, blockchar_probablity, gene_pool_size, mutate_probability, number_of_elite_chromosomes, number_of_new_chromosomes, long_word_multiplier, crossword]
     
