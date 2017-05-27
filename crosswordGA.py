@@ -3,6 +3,7 @@ from builtins import filter
 from itertools import accumulate
 from bisect import bisect
 import re
+import csv
 from configparser import ConfigParser
 
 # This char is the one that represents a block in the crossword
@@ -41,6 +42,7 @@ def pick_random_gene():
         letter = blockchar
     
     return letter
+
 
 # Create an array of randomly chosen letters
 def create_random_chromosome():
@@ -176,6 +178,16 @@ def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
     
     return chromosomes_with_fitness[idx]
 
+
+# Save the result and settings used
+def save_settings_and_result(crossword, epoch):
+    result_file = open("results.csv", "w+")
+    
+    values = [epoch, epoch is not number_of_epochs, cross_height, cross_width, blockchar_probablity, gene_pool_size, mutate_probability, number_of_elite_chromosomes, number_of_new_chromosomes, long_word_multiplier, crossword]
+    
+    csv_writer = csv.writer(result_file)
+    csv_writer.writerow(values)
+
 # The genetic algorithm for finding crosswords
 def start_ga():
     # Create pool of random chromosomes
@@ -218,6 +230,8 @@ def start_ga():
             
     # Pretty print the found solution
     print_crossword(best_crossword)
+    
+    save_settings_and_result(best_crossword, epoch)
     
     
 def read_config():
