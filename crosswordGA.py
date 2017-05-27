@@ -169,9 +169,9 @@ def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
     # Unzip chromosomes with fitess
     fitness, chromosomes = zip(*chromosomes_with_fitness)
     accumulated_fitness = list(accumulate(fitness))
-    idx = bisect(accumulated_fitness, roulette)
+    idx = bisect(accumulated_fitness, roulette, 0, gene_pool_size-1)
     
-    return chromosomes_with_fitness[min(idx, gene_pool_size-1)]
+    return chromosomes_with_fitness[idx]
 
 # The genetic algorithm for finding crosswords
 def start_ga():
