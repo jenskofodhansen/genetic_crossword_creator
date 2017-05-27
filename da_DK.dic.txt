@@ -1,4 +1,3 @@
--årig
 a-aktie
 a-bombe
 a-brev
@@ -326,7 +325,6 @@ adam
 adamshøj
 adamskostume
 adamsæble
-adan
 adane
 adaptation
 adapter
@@ -3991,10 +3989,6 @@ amfiteatret
 amfiteatrets
 amfora
 amhede
-ami
-amia
-amid
-amie
 amielin
 amil
 amila
@@ -48849,9 +48843,6 @@ hanstedå
 hanstholm
 hanstik
 hanvejle
-hao
-hap
-hap
 haploid
 happening
 happeningen
@@ -53214,7 +53205,6 @@ hundstrup
 hundtofte
 hundtoftered
 hundyr
-hune
 hunesø
 hunetorp
 hung
@@ -59185,10 +59175,7 @@ iota
 ioulia
 ip-telefoni
 ip-telefoni
-ipek
-iqra
 ir
-ira
 iraj
 irak
 iraker
@@ -132846,7 +132833,6 @@ tinkerup
 tinkrus
 tinksmed
 tinktur
-tinna
 tinne
 tinni
 tinnie
