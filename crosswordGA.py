@@ -142,12 +142,22 @@ def is_crossword_valid(crossword):
 
 # Breed a new chromosome by fusing two chromosomes at a randomly picked breakpoint. Apply a small chance of mutating the chromosome
 def pair_chromosomes(father, mother):
-    breakpoint = random.randint(0, cross_width * cross_height)
+    breakpoint = random.randint(1, cross_width * cross_height)
     
     father_gene = father[1]
     mother_gene = mother[1]
     
-    child = father_gene[:breakpoint] + mother_gene[breakpoint:]
+    # 50:50 chance of pairing row-wise or column-wise
+    if random.random()>=0.5:
+        child = father_gene[:breakpoint] + mother_gene[breakpoint:]
+    else:
+        child = father_gene.copy()
+            
+        for i in range(0, cross_width * cross_height):
+            # convert to column-wise indexing
+            ci = (i*cross_width)%(cross_width*cross_height) + i//cross_height
+            
+            if i>=breakpoint: child[ci] = mother_gene[ci]
     
     # Mutating the chromosome on genome level
     for i in range(0, cross_width * cross_height):
@@ -162,6 +172,11 @@ Pick a chromosome by fitness. This method uses roulette picking, where the chanc
 being picked is equal to its fitness. 
 '''
 def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
+    
+    # quick picking
+    idx = min(int(random.expovariate(8)*gene_pool_size), gene_pool_size-1)
+    return chromosomes_with_fitness[idx]
+        
     # a random int between 0 and the total fitness
     roulette = random.randint(0, int(fitness_sum))
     
@@ -183,7 +198,7 @@ def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
 def save_settings_and_result(crossword, epoch):
     result_file = open("results.csv", "a+")
     
-    values = [epoch, epoch is not number_of_epochs, cross_height, cross_width, blockchar_probablity, gene_pool_size, mutate_probability, number_of_elite_chromosomes, number_of_new_chromosomes, long_word_multiplier, crossword]
+    values = [epoch, epoch is not number_of_epochs-1, cross_height, cross_width, blockchar_probablity, gene_pool_size, mutate_probability, number_of_elite_chromosomes, number_of_new_chromosomes, long_word_multiplier, ''.join(crossword).encode("utf-8")]
     
     csv_writer = csv.writer(result_file)
     csv_writer.writerow(values)
@@ -219,9 +234,8 @@ def start_ga():
         avg_fitness = fitness_sum/gene_pool_size
         
         # Print stats every 10th epoch
-        if epoch%5 is 0:
+        if epoch%10 is 0:
             print("epoch {} ended - best fitness={} - average fitness={}".format(epoch, chromosomes_with_fitness[0][0], avg_fitness))
-            print_crossword(best_crossword)
         
         # Break if we found a solution (every word exists in the vocabulary)
         if is_crossword_valid(best_crossword) is True:
