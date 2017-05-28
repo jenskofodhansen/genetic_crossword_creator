@@ -302,6 +302,9 @@ def read_config():
     
     global long_word_multiplier 
     long_word_multiplier = ga_settings.getfloat("long_word_multiplier")
+    
+    global only_full_words
+    only_full_words = ga_settings.getboolean("only_full_words")
             
 if __name__ == "__main__":
     read_config()
