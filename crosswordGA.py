@@ -60,7 +60,9 @@ def get_word_fitness(word):
     max_fitness = 0
     
     if word in vocabulary:
-        return len(word)
+        return len(word)**long_word_multiplier
+    #else:
+    #    return 0
     
     words_of_len = filter(lambda x: len(x) is len(word), vocabulary)
     
