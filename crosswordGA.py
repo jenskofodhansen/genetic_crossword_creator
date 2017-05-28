@@ -30,6 +30,8 @@ number_of_elite_chromosomes = int(gene_pool_size*0.01)
 number_of_new_chromosomes = int(gene_pool_size*0.2)
 number_of_epochs = 10000
 
+# Specific parameters
+only_full_words = True
 long_word_multiplier = 1
 
 # Pick a random letter by weighted probability
@@ -61,8 +63,9 @@ def get_word_fitness(word):
     
     if word in vocabulary:
         return len(word)**long_word_multiplier
-    #else:
-    #    return 0
+    
+    if (only_full_words):
+        return 0
     
     words_of_len = filter(lambda x: len(x) is len(word), vocabulary)
     
@@ -200,7 +203,24 @@ def pick_by_fitness(chromosomes_with_fitness, fitness_sum):
 def save_settings_and_result(crossword, epoch):
     result_file = open("results.csv", "a+")
     
-    values = [epoch, epoch is not number_of_epochs-1, cross_height, cross_width, blockchar_probablity, gene_pool_size, mutate_probability, number_of_elite_chromosomes, number_of_new_chromosomes, long_word_multiplier, ''.join(crossword).encode("utf-8")]
+    values = list()
+    values.append(epoch)
+    
+    # Solution found?
+    if epoch is number_of_epochs: 
+        values.append(False)  
+    else: 
+        values.append(True)
+        
+    values.append(cross_height)
+    values.append(cross_width)
+    values.append(blockchar_probablity)
+    values.append(gene_pool_size)
+    values.append(mutate_probability)
+    values.append(number_of_elite_chromosomes)
+    values.append(number_of_new_chromosomes)
+    values.append(long_word_multiplier)
+    values.append(only_full_words)
     
     csv_writer = csv.writer(result_file)
     csv_writer.writerow(values)
@@ -299,7 +319,7 @@ if __name__ == "__main__":
     
     # Make a string with allowed letters for regex searching for words with characters not in accepted set
     allowchars = ''.join(allowed_letters)
-    vocabulary = set(filter(lambda x: re.search("[^{}]".format(allowchars), x) is None, vocabulary))
+    vocabulary = set(filter(lambda x: re.search("[^{}\-]".format(allowchars), x) is None, vocabulary))
     
     # Calculate letter probabilities by counting
     vocabulary_as_string = ''.join(vocabulary)
